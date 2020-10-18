@@ -6,6 +6,9 @@ h3 {
   padding: 1rem 0;
 }
 
+strong {
+  font-weight: bold;
+}
 .rating span {
   margin: 0.1 rem;
 }
