@@ -1,3 +1,4 @@
+import axios from 'axios';
 // Actions
 import {
   PRODUCT_LIST_SUCCESS,
