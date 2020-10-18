@@ -22,7 +22,7 @@ const PrductScreen = ({ match }) => {
         Go Back
       </Link>
       <Row>
-        <Col md={6} className='text-center'>
+        <Col md={6} className='align-center'>
           <Image src={image} alt={name} fluid />
         </Col>
         <Col md={3}>
