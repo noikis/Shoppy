@@ -1,11 +1,14 @@
 import React from 'react';
+import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 const Header = () => {
   return (
     <header>
       <Navbar bg='dark' expand='lg' variant='dark' collapseOnSelect>
         <Container>
-          <Navbar.Brand href=''>Shoppy</Navbar.Brand>
+          <LinkContainer to='/'>
+            <Navbar.Brand>Shoppy</Navbar.Brand>
+          </LinkContainer>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='ml-auto'>
