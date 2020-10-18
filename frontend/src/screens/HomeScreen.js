@@ -1,11 +1,12 @@
 import React, { Fragment, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Spinner } from 'react-bootstrap';
 
-import Product from '../layout/Product';
-import { listProducts } from '../../actions/productActions';
+import Product from '../components/Product';
+import { listProducts } from '../actions/productActions';
 
 const HomeScreen = () => {
+  // make 'connect(mapStateToProps...)' obsolete
   const dispatch = useDispatch();
 
   // Select a part of the store
@@ -20,7 +21,7 @@ const HomeScreen = () => {
     <Fragment>
       <h1>Latest Products</h1>
       {loading ? (
-        <h1>Loading ...</h1>
+        <Spinner animation='border' role='status' style={{}}></Spinner>
       ) : error ? (
         <h3>{error}</h3>
       ) : (
