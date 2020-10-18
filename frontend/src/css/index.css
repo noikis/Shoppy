@@ -9,6 +9,11 @@ h3 {
 strong {
   font-weight: bold;
 }
+
+.navbar {
+  padding: 1rem;
+}
+
 .rating span {
   margin: 0.1 rem;
 }
