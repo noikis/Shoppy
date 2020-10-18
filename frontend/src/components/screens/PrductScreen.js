@@ -1,12 +1,23 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { Card, Col, Row, Image, ListGroup, Button } from 'react-bootstrap';
 
 import Rating from '../layout/Rating';
-import products from '../../products.js';
 
 const PrductScreen = ({ match }) => {
-  const product = products.find((p) => p._id === match.params.id);
+  const [product, setProduct] = useState({});
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = await axios.get(`/api/products/${match.params.id}`);
+
+      setProduct(data);
+    };
+
+    fetchProduct();
+  }, []);
+
   const {
     name,
     image,
@@ -18,8 +29,8 @@ const PrductScreen = ({ match }) => {
   } = product;
   return (
     <Fragment>
-      <Link className='btn btn-light my-3' to='/'>
-        Go Back
+      <Link className='btn btn-outline-dark my-3' to='/'>
+        <i className='fas fa-long-arrow-alt-left'></i> Go Back
       </Link>
       <Row>
         <Col md={6} className='align-center'>
