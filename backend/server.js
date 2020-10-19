@@ -1,8 +1,10 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
+import bodyParser from 'body-parser';
 
 import productRoutes from './routes/productRoutes.js';
+import userRoutes from './routes/userRoutes.js';
 import connectDB from './config/db.js';
 import { errorHandler, notFound } from './middleware/errorMiddleware.js';
 
@@ -12,12 +14,15 @@ connectDB();
 
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('API is Running');
-});
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
 
 // routes
 app.use('/api/products', productRoutes);
+app.use('/api/users', userRoutes);
 
 // Middlewares
 app.use(notFound);
