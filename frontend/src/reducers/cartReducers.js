@@ -4,19 +4,25 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
   switch (action.type) {
     case CART_ADD_ITEM:
       const item = action.payload;
-      const existitem = state.cartItems.filter(
-        (x) => x.product === item.product
-      );
 
-      if (existitem) {
+      // Searchfor the item in state.cartItem
+      const existItem = state.cartItems.find((x) => x.product === item.product);
+
+      // if Found: Create new state.cartItems
+      if (existItem) {
         return {
           ...state,
           cartItems: state.cartItems.map((x) =>
-            x.product === existitem.product ? item : x
+            // product refers to the id of the product
+            x.product === existItem.product ? item : x
           ),
         };
-      } else {
-        return { ...state, cartItems: [...state, item] };
+      } // if Not: Push to the Array
+      else {
+        return {
+          ...state,
+          cartItems: [...state.cartItems, item],
+        };
       }
 
     case CART_REMOVE_ITEM:
