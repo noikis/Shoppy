@@ -27,9 +27,21 @@ const userSchema = mongoose.Schema(
   }
 );
 
+// Check if password is correct
 userSchema.methods.matchPasswords = async function (enteredPassword) {
   return bcrypt.compare(enteredPassword, this.password);
 };
+
+// Middleware: Encrypt password pre registration
+userSchema.pre('save', async function (next) {
+  // Do not modify password when updating profile
+  if (!this.isModified('password')) {
+    next();
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
 
 const User = mongoose.model('User', userSchema);
 
