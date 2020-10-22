@@ -8,6 +8,9 @@ import {
   USER_REGISTER_SUCCESS,
   USER_REGISTER_FAIL,
   USER_LOGOUT,
+  USER_DETAILS_FAIL,
+  USER_DETAILS_REQUEST,
+  USER_DETAILS_SUCCESS,
 } from '../constants/userConstants';
 
 // Login Action
@@ -89,7 +92,7 @@ export const register = (name, email, password) => async (dispatch) => {
 };
 
 // get user Profile Action
-export const getUserProfile = (id) => async (dispatch, getState) => {
+export const getUserDetails = (id) => async (dispatch, getState) => {
   try {
     dispatch({
       type: USER_DETAILS_REQUEST,
