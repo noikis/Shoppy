@@ -1,0 +1,78 @@
+import React, { useState } from 'react';
+import { Button, Col, Row, Form } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import FormContainer from '../components/FormContainer';
+
+import Message from '../components/Message';
+import Loader from '../components/Loader';
+
+const ShippingScreen = () => {
+  // Local State
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [postalCode, setPostalCode] = useState('');
+  const [country, setCountry] = useState('');
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    console.log('Submit');
+  };
+
+  return (
+    <FormContainer>
+      <h1>Shipping Screen</h1>
+
+      <Form onSubmit={submitHandler}>
+        <Form.Group controlId='address'>
+          <Form.Label>address</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Enter address'
+            value={address}
+            required={true}
+            onChange={(e) => setAddress(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId='city'>
+          <Form.Label>city</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Enter city'
+            value={city}
+            required={true}
+            onChange={(e) => setCity(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId='postalCode'>
+          <Form.Label>postal code</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Enter postal code'
+            value={postalCode}
+            required={true}
+            onChange={(e) => setPostalCode(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId='country'>
+          <Form.Label>country</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='Enter country'
+            value={country}
+            required={true}
+            onChange={(e) => setCountry(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Button type='submit' variant='primary'>
+          Continue
+        </Button>
+      </Form>
+    </FormContainer>
+  );
+};
+
+export default ShippingScreen;
