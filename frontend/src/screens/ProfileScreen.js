@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { getUserDetails, updateProfile } from '../actions/userAction';
+import { USER_UPDATE_RESET } from '../constants/userConstants';
 
 const ProfileScreen = ({ history }) => {
   // Local State
@@ -31,15 +32,17 @@ const ProfileScreen = ({ history }) => {
       history.push('/login');
     } else {
       // GET api/users/profile
-      if (!user.name) {
+      if (!user || !user.name || success) {
         dispatch(getUserDetails('profile'));
+        // Reset info in inputFields
+        dispatch({ type: USER_UPDATE_RESET });
       } else {
         // FIll name and email
         setName(user.name);
         setEmail(user.email);
       }
     }
-  }, [dispatch, userInfo, history, user]);
+  }, [dispatch, userInfo, history, user, success]);
 
   const submitHandler = (e) => {
     e.preventDefault();
