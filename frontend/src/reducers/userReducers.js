@@ -65,8 +65,6 @@ export const userUpdateReducer = (state = {}, action) => {
     case USER_UPDATE_FAIL:
       return { loading: false, error: action.payload };
     case USER_UPDATE_RESET:
-      return { loading: false, error: action.payload };
-    case USER_UPDATE_RESET:
       return {};
     default:
       return state;
