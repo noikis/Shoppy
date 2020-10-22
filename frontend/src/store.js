@@ -7,6 +7,7 @@ import {
   userLoginReducer,
   userRegisterReducer,
   userDetailsReducer,
+  userUpdateReducer,
 } from './reducers/userReducers';
 
 import {
@@ -21,6 +22,7 @@ const reducer = combineReducers({
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
+  userUpdate: userUpdateReducer,
 });
 
 // get Items from Local Storage
