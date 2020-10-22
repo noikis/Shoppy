@@ -93,7 +93,7 @@ const RegisterScreen = ({ location, history }) => {
         </Button>
       </Form>
 
-      <Row>
+      <Row className='mt-3'>
         <Col>
           Have an account ?{' '}
           <Link to={redirect ? `/login?redirect=${redirect}` : '/login'}>
