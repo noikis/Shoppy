@@ -5,7 +5,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
     case CART_ADD_ITEM:
       const item = action.payload;
 
-      // Searchfor the item in state.cartItem
+      // Search for the item in state.cartItem
       const existItem = state.cartItems.find((x) => x.product === item.product);
 
       // if Found: Create new state.cartItems
