@@ -3,7 +3,10 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { cartReducer } from './reducers/cartReducers';
-import orderCreateReducer from './reducers/orderReducers';
+import {
+  orderCreateReducer,
+  orderDetailsReducer,
+} from './reducers/orderReducers';
 import {
   userLoginReducer,
   userRegisterReducer,
@@ -25,6 +28,7 @@ const reducer = combineReducers({
   userDetails: userDetailsReducer,
   userUpdate: userUpdateReducer,
   orderCreate: orderCreateReducer,
+  orderDetails: orderDetailsReducer,
 });
 
 // get Items from Local Storage
