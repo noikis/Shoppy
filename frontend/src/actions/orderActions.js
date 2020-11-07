@@ -8,7 +8,6 @@ import {
   ORDER_DETAILS_REQUEST,
   ORDER_DETAILS_SUCCESS,
 } from '../constants/orderConstants';
-import { USER_LOGIN_SUCCESS } from '../constants/userConstants';
 
 // Create new Order
 export const createOrder = (order) => async (dispatch, getState) => {
@@ -34,14 +33,6 @@ export const createOrder = (order) => async (dispatch, getState) => {
       type: ORDER_CREATE_SUCCESS,
       payload: data,
     });
-
-    // To Update the name in Navbar
-    dispatch({
-      type: USER_LOGIN_SUCCESS,
-      payload: data,
-    });
-
-    localStorage.setItem('userInfo', JSON.stringify(data));
   } catch (error) {
     dispatch({
       type: ORDER_CREATE_FAIL,
