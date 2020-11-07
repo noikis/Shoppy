@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { getUserDetails, updateProfile } from '../actions/userAction';
+import { listMyOrders } from '../actions/orderActions';
 import { USER_UPDATE_RESET } from '../constants/userConstants';
 
 const ProfileScreen = ({ history }) => {
@@ -20,6 +21,9 @@ const ProfileScreen = ({ history }) => {
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
 
+  const orderMyList = useSelector((state) => state.orderMyList);
+  const { loading: loadingOrders, error: errorOrders, orders } = orderMyList;
+
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
@@ -34,6 +38,7 @@ const ProfileScreen = ({ history }) => {
       // GET api/users/profile
       if (!user || !user.name || success) {
         dispatch(getUserDetails('profile'));
+        dispatch(listMyOrders());
         // Reset info in inputFields
         dispatch({ type: USER_UPDATE_RESET });
       } else {
