@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { ORDER_DETAILS_RESET } from '../constants/orderConstants';
 
 import {
   USER_LOGIN_REQUEST,
@@ -14,6 +15,7 @@ import {
   USER_DETAILS_FAIL,
   USER_DETAILS_REQUEST,
   USER_DETAILS_SUCCESS,
+  USER_DETAILS_RESET,
 } from '../constants/userConstants';
 
 // Login Action
@@ -176,7 +178,7 @@ export const updateProfile = (user) => async (dispatch, getState) => {
 export const logout = () => (dispatch) => {
   localStorage.removeItem('userInfo');
 
-  dispatch({
-    type: USER_LOGOUT,
-  });
+  dispatch({ type: USER_LOGOUT });
+  dispatch({ type: USER_DETAILS_RESET });
+  dispatch({ type: ORDER_DETAILS_RESET });
 };
