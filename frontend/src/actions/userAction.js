@@ -20,6 +20,9 @@ import {
   USER_LIST_SUCCESS,
   USER_LIST_REQUEST,
   USER_LIST_RESET,
+  USER_DELETE_REQUEST,
+  USER_DELETE_SUCCESS,
+  USER_DELETE_FAIL,
 } from '../constants/userConstants';
 
 // Login Action
@@ -178,6 +181,38 @@ export const updateProfile = (user) => async (dispatch, getState) => {
   }
 };
 
+// Delete user Action
+export const deleteUser = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: USER_DELETE_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token} `,
+      },
+    };
+
+    axios.delete(`/api/users/${id}`, config);
+
+    dispatch({ type: USER_DELETE_SUCCESS });
+  } catch (error) {
+    dispatch({
+      type: USER_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message,
+    });
+  }
+};
+
 // GET All users Action
 export const listUsers = () => async (dispatch, getState) => {
   try {
@@ -220,5 +255,5 @@ export const logout = () => (dispatch) => {
   dispatch({ type: ORDER_DETAILS_RESET });
   dispatch({ type: USER_LIST_RESET });
 
-  //localStorage.removeItem('userInfo');
+  localStorage.removeItem('userInfo');
 };
