@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
-import Message from '../components/Message';
-import Loader from '../components/Loader';
-import FormContainer from '../components/FormContainer';
-import { getUserDetails, editUser } from '../actions/userAction';
-import { USER_EDIT_RESET } from '../constants/userConstants';
+import Message from '../../components/Message';
+import Loader from '../../components/Loader';
+import FormContainer from '../../components/FormContainer';
+import { getUserDetails, editUser } from '../../actions/userAction';
+import { USER_EDIT_RESET } from '../../constants/userConstants';
 
 const UserEditScreen = ({ match, history }) => {
   const userId = match.params.id;
