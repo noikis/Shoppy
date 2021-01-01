@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
-import { getUserDetails } from '../actions/userAction';
+import { getUserDetails, editUser } from '../actions/userAction';
+import { USER_EDIT_RESET } from '../constants/userConstants';
 
 const UserEditScreen = ({ match, history }) => {
   const userId = match.params.id;
@@ -20,18 +21,33 @@ const UserEditScreen = ({ match, history }) => {
   const userDetails = useSelector((state) => state.userDetails);
   const { loading, error, user } = userDetails;
 
+  const userEdit = useSelector((state) => state.userEdit);
+  const {
+    loading: loadingEdit,
+    error: errorEdit,
+    success: successEdit,
+  } = userEdit;
+
   useEffect(() => {
-    if (!user.name || user._id !== userId) {
-      dispatch(getUserDetails(userId));
+    // Submit Changes
+    if (successEdit) {
+      dispatch({ type: USER_EDIT_RESET });
+      history.push('/admin/user/list');
     } else {
-      setName(user.name);
-      setEmail(user.email);
-      setIsAdmin(user.isAdmin);
+      if (!user.name || user._id !== userId) {
+        dispatch(getUserDetails(userId));
+      } else {
+        setName(user.name);
+        setEmail(user.email);
+        setIsAdmin(user.isAdmin);
+      }
     }
-  }, [dispatch, user, userId]);
+  }, [dispatch, user, userId, successEdit, history]);
 
   const submitHandler = (e) => {
     e.preventDefault();
+    dispatch(editUser({ _id: userId, name, email, isAdmin }));
+    console.log('Submit');
   };
   return (
     <Fragment>
@@ -40,6 +56,8 @@ const UserEditScreen = ({ match, history }) => {
       </Link>
       <FormContainer>
         <h1>Edit User</h1>
+        {loadingEdit && <Loader />}
+        {errorEdit && <Message variant='danger'>{errorEdit}</Message>}
         {loading ? (
           <Loader />
         ) : error ? (
