@@ -47,7 +47,6 @@ const UserEditScreen = ({ match, history }) => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(editUser({ _id: userId, name, email, isAdmin }));
-    console.log('Submit');
   };
   return (
     <Fragment>
