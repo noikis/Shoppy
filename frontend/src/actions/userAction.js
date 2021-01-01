@@ -1,4 +1,5 @@
 import axios from 'axios';
+import messageError from '../utils/messageError';
 import { ORDER_DETAILS_RESET } from '../constants/orderConstants';
 
 import {
@@ -56,10 +57,7 @@ export const login = (email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_LOGIN_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: messageError(error),
     });
   }
 };
@@ -98,10 +96,7 @@ export const register = (name, email, password) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: USER_REGISTER_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: messageError(error),
     });
   }
 };
@@ -133,10 +128,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_DETAILS_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: messageError(error),
     });
   }
 };
@@ -176,10 +168,7 @@ export const updateProfile = (user) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_UPDATE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: messageError(error),
     });
   }
 };
@@ -208,10 +197,7 @@ export const deleteUser = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_DELETE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: messageError(error),
     });
   }
 };
@@ -242,10 +228,7 @@ export const editUser = (user) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_EDIT_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: messageError(error),
     });
   }
 };
@@ -277,10 +260,7 @@ export const listUsers = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: USER_LIST_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: messageError(error),
     });
   }
 };

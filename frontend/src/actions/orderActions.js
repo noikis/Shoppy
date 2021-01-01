@@ -1,4 +1,5 @@
 import axios from 'axios';
+import messageError from '../utils/messageError';
 
 import {
   ORDER_CREATE_FAIL,
@@ -42,10 +43,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ORDER_CREATE_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: messageError(error),
     });
   }
 };
@@ -76,10 +74,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ORDER_DETAILS_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: messageError(error),
     });
   }
 };
@@ -118,10 +113,7 @@ export const payOrder = (orderId, PaymentResult) => async (
   } catch (error) {
     dispatch({
       type: ORDER_PAY_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: messageError(error),
     });
   }
 };
@@ -152,10 +144,7 @@ export const listMyOrders = () => async (dispatch, getState) => {
   } catch (error) {
     dispatch({
       type: ORDER_MY_LIST_FAIL,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
+      payload: messageError(error),
     });
   }
 };
