@@ -3,7 +3,11 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Table, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { createProduct, deleteProduct } from '../../actions/productActions';
+import {
+  createProduct,
+  deleteProduct,
+  listProducts,
+} from '../../actions/productActions';
 import Message from '../../components/Message';
 import Loader from '../../components/Loader';
 import { PRODUCT_CREATE_RESET } from '../../constants/productConstants';
@@ -42,6 +46,8 @@ const ProductListScreen = ({ history, match }) => {
     if (successCreate) {
       history.push(`/admin/product/${createdProduct._id}/edit`);
     }
+
+    dispatch(listProducts());
   }, [
     dispatch,
     history,
