@@ -8,7 +8,8 @@ import {
   orderCreateReducer,
   orderDetailsReducer,
   orderMyListReducer,
-  orderPaylsReducer,
+  orderPayReducer,
+  orderDeliverReducer,
   orderListReducer,
 } from './reducers/orderReducers';
 // User
@@ -50,10 +51,13 @@ const reducer = combineReducers({
   // Order
   orderCreate: orderCreateReducer,
   orderDetails: orderDetailsReducer,
-  orderPay: orderPaylsReducer,
+  orderPay: orderPayReducer,
+  orderDeliver: orderDeliverReducer,
   orderMyList: orderMyListReducer,
   orderList: orderListReducer,
 });
+
+// TODO: useLocalStorage Hook
 
 // get Items from Local Storage
 const cartItemsFromLocalStorage = localStorage.getItem('cartItems')

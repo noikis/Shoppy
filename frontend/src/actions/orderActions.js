@@ -17,6 +17,9 @@ import {
   ORDER_LIST_REQUEST,
   ORDER_LIST_SUCCESS,
   ORDER_LIST_FAIL,
+  ORDER_DELIVER_FAIL,
+  ORDER_DELIVER_SUCCESS,
+  ORDER_DELIVER_REQUEST,
 } from '../constants/orderConstants';
 
 // Create new Order
@@ -82,7 +85,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
   }
 };
 
-// Get Order By Id
+// PUT Pay Order
 export const payOrder = (orderId, PaymentResult) => async (
   dispatch,
   getState
@@ -116,6 +119,42 @@ export const payOrder = (orderId, PaymentResult) => async (
   } catch (error) {
     dispatch({
       type: ORDER_PAY_FAIL,
+      payload: messageError(error),
+    });
+  }
+};
+
+// PUT Deliver Order
+export const deliverOrder = (order) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: ORDER_DELIVER_REQUEST,
+    });
+
+    const {
+      userLogin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token} `,
+      },
+    };
+
+    const { data } = await axios.get(
+      `/api/orders/${order._id}/deliver`,
+      order,
+      config
+    );
+
+    dispatch({
+      type: ORDER_DELIVER_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: ORDER_DELIVER_FAIL,
       payload: messageError(error),
     });
   }
